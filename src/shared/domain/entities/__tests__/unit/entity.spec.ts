@@ -10,6 +10,14 @@ type StubProps = {
 class StubEntity extends Entity<StubProps> { }
 
 describe('Entity unit tests', () => {
+  it('should throw an exception when an invalid UUID is provided as id', () => {
+    const props = { prop1: 'value1', prop2: 15 };
+    const invalidId = '123-c68b-4cfd-99dd-aac08024be8d';
+    const createEntity = () => new StubEntity(props, invalidId);
+
+    expect(createEntity).toThrowError('O ID fornecido não é um UUID v4 válido');
+  });
+
   it('should set props and id', () => {
     const props = { prop1: 'value1', prop2: 15 };
     const entity = new StubEntity(props);

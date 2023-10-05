@@ -17,7 +17,7 @@ describe('UserEntity unit tests', () => {
     expect(sut.props.createdAt).toBeInstanceOf(Date);
   });
 
-  it('should test the name fields getter', () => {
+  it('should test the name field getter', () => {
     expect(sut.name).toBeDefined();
     expect(sut.name).toEqual(props.name);
     expect(sut.props.name).toBeDefined();
@@ -25,7 +25,7 @@ describe('UserEntity unit tests', () => {
     expect(typeof sut.props.name).toBe('string');
   });
 
-  it('should test the email fields getter', () => {
+  it('should test the email field getter', () => {
     expect(sut.email).toBeDefined();
     expect(sut.email).toEqual(props.email);
     expect(sut.props.email).toBeDefined();
@@ -33,7 +33,7 @@ describe('UserEntity unit tests', () => {
     expect(typeof sut.props.email).toBe('string');
   });
 
-  it('should test the password fields getter', () => {
+  it('should test the password field getter', () => {
     expect(sut.password).toBeDefined();
     expect(sut.password).toEqual(props.password);
     expect(sut.props.password).toBeDefined();
@@ -41,9 +41,39 @@ describe('UserEntity unit tests', () => {
     expect(typeof sut.props.password).toBe('string');
   });
 
-  it('should test the createdAt fields getter', () => {
+  it('should test the createdAt field getter', () => {
     expect(sut.createdAt).toBeDefined();
     expect(sut.props.createdAt).toBeDefined();
     expect(sut.props.createdAt).toBeInstanceOf(Date);
+  });
+
+  it('should test the name field setter', () => {
+    const newName = "newName";
+    sut['name'] = newName;
+
+    expect(sut.props.name).toEqual(newName);
+  });
+
+  it('should test the password field setter', () => {
+    const newPassword = "newPassword";
+    sut['password'] = newPassword;
+
+    expect(sut.props.password).toEqual(newPassword);
+  });
+
+  it('should test the update method', () => {
+    expect(sut.props.name).toEqual(props.name);
+
+    const newName = "newName";
+    sut.update(newName);
+    expect(sut.props.name).toEqual(newName);
+  });
+
+  it('should test the updatePassword method', () => {
+    expect(sut.props.password).toEqual(props.password);
+
+    const newPassword = "newPassword";
+    sut.updatePassword(newPassword);
+    expect(sut.props.password).toEqual(newPassword);
   });
 });

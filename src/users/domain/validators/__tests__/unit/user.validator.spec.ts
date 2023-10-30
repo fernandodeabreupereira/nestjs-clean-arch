@@ -39,7 +39,37 @@ describe('UserValidator unit tests', () => {
     ]);
   });
 
-  it('valid case for name field', () => {
+  it('Invalidation cases for email field', () => {
+    let isValid = sut.validate(null as any);
+    expect(isValid).toBeFalsy();
+    expect(sut.errors['email']).toStrictEqual([
+      'email should not be empty',
+      'email must be a string',
+      'email must be an email'
+    ]);
+
+    isValid = sut.validate({ ...props, email: '' });
+    expect(isValid).toBeFalsy();
+    expect(sut.errors['email']).toStrictEqual([
+      'email should not be empty',
+      'email must be an email',
+    ]);
+
+    isValid = sut.validate({ ...props, email: 10 as any });
+    expect(isValid).toBeFalsy();
+    expect(sut.errors['email']).toStrictEqual([
+      'email must be a string',
+      'email must be an email',
+    ]);
+
+    isValid = sut.validate({ ...props, email: 'a'.repeat(256) });
+    expect(isValid).toBeFalsy();
+    expect(sut.errors['email']).toStrictEqual([
+      'email must be an email',
+    ]);
+  });
+
+  it('valid case for user rules', () => {
     const isValid = sut.validate(props);
     expect(isValid).toBeTruthy();
     expect(sut.validatedData).toStrictEqual(new UserRules(props));
